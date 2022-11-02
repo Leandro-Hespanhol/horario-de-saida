@@ -3,27 +3,50 @@ import './Relogios.scss';
 import calculo from '../service/calculoDeHoras';
 
 export default function Relogios() {
+  const [jornada, setJornada] = useState({ horas: 8, minutos: 48})
   const [entradaDia, setEntradaDia] = useState({ horas: 0, minutos: 0 });
   const [entradaAlmoco, setEntradaAlmoco] = useState({ horas: 0, minutos: 0 });
   const [saidaAlmoco, setSaidaAlmoco] = useState({ horas: 0, minutos: 0 });
   const [saidaDia, setSaidaDia] = useState("0");
 
   const horaMinutoBuild = () => {
+    const jorn = `${jornada.horas}:${jornada.minutos}`
     const entDia = `${entradaDia.horas}:${entradaDia.minutos}`
     const entAlm = `${entradaAlmoco.horas}:${entradaAlmoco.minutos}`
     const saidaAlm = `${saidaAlmoco.horas}:${saidaAlmoco.minutos}`
 
-    setSaidaDia(calculo(entDia, entAlm, saidaAlm))
+    setSaidaDia(calculo(jorn, entDia, entAlm, saidaAlm))
   };
 
   useEffect(() => {
     horaMinutoBuild()
-  }, [entradaDia, entradaAlmoco, saidaAlmoco])
+  }, [jornada, entradaDia, entradaAlmoco, saidaAlmoco])
   
 
   return (
     <div className="main-relogios">
-      <div className="horas-minutos">
+      <label><p>Hora | Minuto</p></label>
+        <label>{`Defina sua jornada diária: `}
+            <input
+              type="number"
+              className="horas"
+              value={jornada.horas}
+              placeholder={jornada.horas + 'horas'}
+              min="0"
+              max="23"
+              onChange={(e) =>
+                setJornada({ ...jornada, horas: e.target.value })
+              }
+            />
+            <input
+              type="number"
+              className="minutos"
+              value={jornada.minutos}
+              onChange={(e) =>
+                setJornada({ ...jornada, minutos: e.target.value })
+              }
+            />
+        </label>
         <label>
           {`Entrada do dia: `}
           <input
@@ -45,31 +68,27 @@ export default function Relogios() {
             }
           />
         </label>
-      </div>
-      <div className="horas-minutos">
         <label>
-        {`Entrada do Almoço: `}
-          <input
-            type="number"
-            className="horas"
-            value={entradaAlmoco.horas}
-            min="0"
-            max="23"
-            onChange={(e) =>
-              setEntradaAlmoco({ ...entradaAlmoco, horas: e.target.value })
-            }
-          />
-          <input
-            type="number"
-            className="minutos"
-            value={entradaAlmoco.minutos}
-            onChange={(e) =>
-              setEntradaAlmoco({ ...entradaAlmoco, minutos: e.target.value })
-            }
-          />
+          {`Entrada do Almoço: `}
+            <input
+              type="number"
+              className="horas"
+              value={entradaAlmoco.horas}
+              min="0"
+              max="23"
+              onChange={(e) =>
+                setEntradaAlmoco({ ...entradaAlmoco, horas: e.target.value })
+              }
+            />
+            <input
+              type="number"
+              className="minutos"
+              value={entradaAlmoco.minutos}
+              onChange={(e) =>
+                setEntradaAlmoco({ ...entradaAlmoco, minutos: e.target.value })
+              }
+            />
         </label>
-      </div>
-      <div className="horas-minutos">
         <label>
         {`Saída do almoço: `}
           <input
@@ -91,8 +110,7 @@ export default function Relogios() {
             }
           />
         </label>
-      </div>
-      <div className="horas-minutos">{`Você completará 8:48 às ${saidaDia}`}</div>
+      <label className="horas-minutos">{`Você completará ${jornada.horas} horas e ${jornada.minutos} minutos às ${saidaDia}`}</label>
     </div>
   );
 }
