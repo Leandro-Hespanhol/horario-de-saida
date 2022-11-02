@@ -14,9 +14,11 @@
 
 .main-relogios {
   display: grid;
+  align-items: center;
+  justify-content: center;
   grid-template-columns: auto;
   background-color: #2196F3;
-  padding: 10px;
+  padding: 150px 0;
   label {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
