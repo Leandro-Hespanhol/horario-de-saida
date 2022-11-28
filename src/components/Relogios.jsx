@@ -18,6 +18,11 @@ export default function Relogios() {
     setSaidaDia(calculo(jorn, entDia, entAlm, saidaAlm))
   };
 
+  const noNegativeValue = (horaOuMinuto) => {
+    // A função recebe o parâmetro horaOuMinuto que representa o valor de horas ou minutos de cada um dos campos
+    // Escreva uma solução para que impedir que o valor de horaOuMinuto fique negativo
+  }
+
   useEffect(() => {
     horaMinutoBuild()
   }, [jornada, entradaDia, entradaAlmoco, saidaAlmoco])
@@ -35,7 +40,7 @@ export default function Relogios() {
               min="0"
               max="23"
               onChange={(e) =>
-                setJornada({ ...jornada, horas: e.target.value })
+                setJornada({ ...jornada, horas: noNegativeValue(e.target.value) })
               }
             />
             <input
@@ -43,7 +48,7 @@ export default function Relogios() {
               className="minutos"
               value={jornada.minutos}
               onChange={(e) =>
-                setJornada({ ...jornada, minutos: e.target.value })
+                setJornada({ ...jornada, minutos: noNegativeValue(e.target.value) })
               }
             />
         </label>
@@ -56,7 +61,7 @@ export default function Relogios() {
             min="0"
             max="23"
             onChange={(e) =>
-              setEntradaDia({ ...entradaDia, horas: e.target.value })
+              setEntradaDia({ ...entradaDia, horas: noNegativeValue(e.target.value) })
             }
           />
           <input
@@ -64,12 +69,12 @@ export default function Relogios() {
             className="minutos"
             value={entradaDia.minutos}
             onChange={(e) =>
-              setEntradaDia({ ...entradaDia, minutos: e.target.value })
+              setEntradaDia({ ...entradaDia, minutos: noNegativeValue(e.target.value) })
             }
           />
         </label>
         <label>
-          {`Entrada do Almoço: `}
+          {`Início do intervalo do Almoço: `}
             <input
               type="number"
               className="horas"
@@ -77,7 +82,7 @@ export default function Relogios() {
               min="0"
               max="23"
               onChange={(e) =>
-                setEntradaAlmoco({ ...entradaAlmoco, horas: e.target.value })
+                setEntradaAlmoco({ ...entradaAlmoco, horas: noNegativeValue(e.target.value) })
               }
             />
             <input
@@ -85,12 +90,12 @@ export default function Relogios() {
               className="minutos"
               value={entradaAlmoco.minutos}
               onChange={(e) =>
-                setEntradaAlmoco({ ...entradaAlmoco, minutos: e.target.value })
+                setEntradaAlmoco({ ...entradaAlmoco, minutos: noNegativeValue(e.target.value) })
               }
             />
         </label>
         <label>
-        {`Saída do almoço: `}
+        {`Final do intervalo do almoço: `}
           <input
             type="number"
             className="horas"
@@ -98,7 +103,7 @@ export default function Relogios() {
             min="0"
             max="23"
             onChange={(e) =>
-              setSaidaAlmoco({ ...saidaAlmoco, horas: e.target.value })
+              setSaidaAlmoco({ ...saidaAlmoco, horas: noNegativeValue(e.target.value) })
             }
           />
           <input
@@ -106,7 +111,7 @@ export default function Relogios() {
             className="minutos"
             value={saidaAlmoco.minutos}
             onChange={(e) =>
-              setSaidaAlmoco({ ...saidaAlmoco, minutos: e.target.value })
+              setSaidaAlmoco({ ...saidaAlmoco, minutos: noNegativeValue(e.target.value) })
             }
           />
         </label>
