@@ -35,17 +35,17 @@ export default function Relogios() {
               min="0"
               max="23"
               onChange={(e) =>
-                setJornada({ ...jornada, horas: setJornada(e.target.value) })
+                setJornada({ ...jornada, horas: e.target.value })
               }
             />
             <input
               type="number"
               className="minutos"
               value={jornada.minutos}
-//               min="0"
-//               max="59"
+              min="0"
+              max="59"
               onChange={(e) =>
-                setJornada({ ...jornada, minutos: setJornada(e.target.value) })
+                setJornada({ ...jornada, minutos: e.target.value })
               }
             />
         </label>
@@ -58,17 +58,17 @@ export default function Relogios() {
             min="0"
             max="23"
             onChange={(e) =>
-              setEntradaDia({ ...entradaDia, horas: setEntradaDia(e.target.value) })
+              setEntradaDia({ ...entradaDia, horas: e.target.value })
             }
           />
           <input
             type="number"
             className="minutos"
             value={entradaDia.minutos}
-//             min="0"
-//             max="59"
+            min="0"
+            max="59"
             onChange={(e) =>
-              setEntradaDia({ ...entradaDia, minutos: setEntradaDia(e.target.value) })
+              setEntradaDia({ ...entradaDia, minutos: e.target.value })
             }
           />
         </label>
@@ -81,17 +81,17 @@ export default function Relogios() {
               min="0"
               max="23"
               onChange={(e) =>
-                setEntradaAlmoco({ ...entradaAlmoco, horas: setEntradaAlmoco(e.target.value) })
+                setEntradaAlmoco({ ...entradaAlmoco, horas: e.target.value })
               }
             />
             <input
               type="number"
               className="minutos"
-//               min="0"
-//               max="59"
+              min="0"
+              max="59"
               value={entradaAlmoco.minutos}
               onChange={(e) =>
-                setEntradaAlmoco({ ...entradaAlmoco, minutos: setEntradaAlmoco(e.target.value) })
+                setEntradaAlmoco({ ...entradaAlmoco, minutos: e.target.value })
               }
             />
         </label>
@@ -104,17 +104,17 @@ export default function Relogios() {
             min="0"
             max="23"
             onChange={(e) =>
-              setSaidaAlmoco({ ...saidaAlmoco, horas: setSaidaAlmoco(e.target.value) })
+              setSaidaAlmoco({ ...saidaAlmoco, horas: e.target.value })
             }
           />
           <input
             type="number"
             className="minutos"
-//             min="0"
-//             max="59"
+            min="0"
+            max="59"
             value={saidaAlmoco.minutos}
             onChange={(e) =>
-              setSaidaAlmoco({ ...saidaAlmoco, minutos: setSaidaAlmoco(e.target.value) })
+              setSaidaAlmoco({ ...saidaAlmoco, minutos: e.target.value })
             }
           />
         </label>
