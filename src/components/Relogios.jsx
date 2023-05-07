@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Relogios.scss';
 import calculo from '../service/calculoDeHoras';
+import alarme from '../assets/audio/Chicago-Drag-Excellence.mp3'
 
 export default function Relogios() {
   const [jornada, setJornada] = useState({ horas: 8, minutos: 48})
@@ -8,6 +9,19 @@ export default function Relogios() {
   const [entradaAlmoco, setEntradaAlmoco] = useState({ horas: 12, minutos: 0 });
   const [saidaAlmoco, setSaidaAlmoco] = useState({ horas: 13, minutos: 0 });
   const [saidaDia, setSaidaDia] = useState("0");
+  const [timer, setTimer] = useState("")
+
+  function setAlarm() {
+    if (Number(timer.split(":").join("")) <= Number(saidaDia.split(":").join(""))) {
+      playAlarm()
+    }
+  }
+
+  function playAlarm() {
+   const music = new Audio(alarme);
+   music.volume = 0.3;
+   music.play()
+  }
 
   const horaMinutoBuild = () => {
     const jorn = `${jornada.horas}:${jornada.minutos}`
@@ -39,7 +53,13 @@ export default function Relogios() {
   useEffect(() => {
     horaMinutoBuild()
   }, [jornada, entradaDia, entradaAlmoco, saidaAlmoco])
-  
+
+  useEffect(() => {
+    setInterval(() => {
+      setTimer(new Date().getHours().toString()+":"+ new Date().getMinutes().toString())
+    }, 59000);
+    setAlarm()
+  }, [timer])
 
   return (
     <div className="main-relogios">
