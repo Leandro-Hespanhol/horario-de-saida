@@ -10,6 +10,7 @@ export default function Relogios() {
   const [saidaAlmoco, setSaidaAlmoco] = useState({ horas: 13, minutos: 0 });
   const [saidaDia, setSaidaDia] = useState("0");
   const [timer, setTimer] = useState("")
+  const [shouldPlay, setShouldPlay] = useState(true)
 
   function setAlarm() {
     if (Number(timer.split(":").join("")) <= Number(saidaDia.split(":").join(""))) {
@@ -18,10 +19,20 @@ export default function Relogios() {
   }
 
   function playAlarm() {
-   const music = new Audio(alarme);
-   music.volume = 0.3;
-   music.play()
+    if (shouldPlay) {
+      const music = new Audio(alarme);
+      music.volume = 0.3;
+      music.play()
+      setShouldPlay(false)
+    }
   }
+
+  useEffect(() => {
+    setInterval(() => {
+      setTimer(new Date().getHours().toString()+":"+ new Date().getMinutes().toString())
+    }, 59900);
+    setAlarm()
+  }, [timer])
 
   const horaMinutoBuild = () => {
     const jorn = `${jornada.horas}:${jornada.minutos}`
@@ -53,13 +64,6 @@ export default function Relogios() {
   useEffect(() => {
     horaMinutoBuild()
   }, [jornada, entradaDia, entradaAlmoco, saidaAlmoco])
-
-  useEffect(() => {
-    setInterval(() => {
-      setTimer(new Date().getHours().toString()+":"+ new Date().getMinutes().toString())
-    }, 59000);
-    setAlarm()
-  }, [timer])
 
   return (
     <div className="main-relogios">
