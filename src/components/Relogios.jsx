@@ -4,9 +4,9 @@ import calculo from '../service/calculoDeHoras';
 
 export default function Relogios() {
   const [jornada, setJornada] = useState({ horas: 8, minutos: 48})
-  const [entradaDia, setEntradaDia] = useState({ horas: 0, minutos: 0 });
-  const [entradaAlmoco, setEntradaAlmoco] = useState({ horas: 0, minutos: 0 });
-  const [saidaAlmoco, setSaidaAlmoco] = useState({ horas: 0, minutos: 0 });
+  const [entradaDia, setEntradaDia] = useState({ horas: 8, minutos: 40 });
+  const [entradaAlmoco, setEntradaAlmoco] = useState({ horas: 12, minutos: 0 });
+  const [saidaAlmoco, setSaidaAlmoco] = useState({ horas: 13, minutos: 0 });
   const [saidaDia, setSaidaDia] = useState("0");
 
   const horaMinutoBuild = () => {
@@ -17,6 +17,24 @@ export default function Relogios() {
 
     setSaidaDia(calculo(jorn, entDia, entAlm, saidaAlm))
   };
+
+  const validateTime = (value, state, setState) => {
+    console.log("jornada", jornada);
+    if (state.horas > 23) {
+      console.log("dentro", jornada)
+      return setState({...state, horas: 23 })
+    }
+    if (state.horas < 0) {
+      return setState({...state, horas: 0 })
+    }
+    if (state.minutos > 59) {
+      return setState({...state, minutos: 59 })
+    }
+    if (state.minutos < 0) {
+      return setState({...state, minutos: 0 })
+    }
+    setState({ ...value})
+  }
 
   useEffect(() => {
     horaMinutoBuild()
@@ -35,7 +53,7 @@ export default function Relogios() {
               min="0"
               max="23"
               onChange={(e) =>
-                setJornada({ ...jornada, horas: e.target.value })
+                validateTime(e.target.value, jornada, setJornada)
               }
             />
             <input
