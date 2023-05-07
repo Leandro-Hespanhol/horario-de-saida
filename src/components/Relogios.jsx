@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Relogios.scss';
 import calculo from '../service/calculoDeHoras';
-import alarme from '../assets/audio/Chicago-Drag-Excellence.mp3'
+import mufasa from '../assets/audio/Mufasa.mp3'
 
 export default function Relogios() {
   const [jornada, setJornada] = useState({ horas: 8, minutos: 48})
@@ -18,7 +18,7 @@ export default function Relogios() {
   }
 
   function playAlarm() {
-      const music = new Audio(alarme);
+      const music = new Audio(mufasa);
       music.volume = 0.3;
       music.play()
   }
