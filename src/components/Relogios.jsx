@@ -12,7 +12,7 @@ export default function Relogios() {
   const [timer, setTimer] = useState("")
 
   function setAlarm() {
-    if (Number(timer.split(":").join("")) <= Number(saidaDia.split(":").join(""))) {
+    if (Number(timer.split(":").join("")) >= Number(saidaDia.split(":").join(""))) {
       playAlarm()
     }
   }
