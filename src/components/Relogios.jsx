@@ -9,15 +9,19 @@ export default function Relogios() {
   const [entradaAlmoco, setEntradaAlmoco] = useState({ horas: 12, minutos: 0 });
   const [saidaAlmoco, setSaidaAlmoco] = useState({ horas: 13, minutos: 0 });
   const [saidaDia, setSaidaDia] = useState("0");
-  const [timer, setTimer] = useState("")
+  const [timer, setTimer] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false);
 
   function setAlarm() {
+   if (!isPlaying) {
     if (Number(timer.split(":").join("")) >= Number(saidaDia.split(":").join(""))) {
       playAlarm()
     }
+   }
   }
 
   function playAlarm() {
+      setIsPlaying(true)
       const music = new Audio(mufasa);
       music.volume = 0.3;
       music.play()
